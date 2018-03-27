@@ -2,6 +2,9 @@
 sphinxcontrib-apidoc
 ====================
 
+.. image:: https://travis-ci.org/sphinx-contrib/apidoc.svg?branch=master
+    :target: https://travis-ci.org/sphinx-contrib/apidoc
+
 A Sphinx extension for running `sphinx-apidoc`_ on each build.
 
 Overview
