@@ -36,7 +36,7 @@ documentation's ``conf.py`` file, like so:
     ]
     apidoc_module_dir = '../my_code'
     apidoc_output_dir = 'reference'
-    apidoc_excluded_modules = ['tests']
+    apidoc_excluded_paths = ['tests']
 
 Configuration
 -------------
@@ -56,7 +56,7 @@ The *apidoc* extension uses the following configuration values:
 
    **Optional**, defaults to ``api``.
 
-``apidoc_excluded_modules``
+``apidoc_excluded_paths``
    An optional list of modules to exclude. These should be paths relative to
    ``apidoc_module_dir``. fnmatch-style wildcarding is supported.
 

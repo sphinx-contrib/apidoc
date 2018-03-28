@@ -27,6 +27,6 @@ def setup(app):
     app.connect('builder-inited', ext.builder_inited)
     app.add_config_value('apidoc_module_dir', None, 'env', [str])
     app.add_config_value('apidoc_output_dir', 'api', 'env', [str])
-    app.add_config_value('apidoc_excluded_modules', [], 'env', [[str]])
+    app.add_config_value('apidoc_excluded_paths', [], 'env', [[str]])
 
     return {'version': __version__, 'parallel_read_safe': True}

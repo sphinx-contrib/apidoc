@@ -28,7 +28,7 @@ def builder_inited(app):
     # type: (Sphinx) -> None
     module_dir = app.config.apidoc_module_dir
     output_dir = path.join(app.srcdir, app.config.apidoc_output_dir)
-    excludes = app.config.apidoc_excluded_modules
+    excludes = app.config.apidoc_excluded_paths
 
     if not module_dir:
         logger.warning("No 'apidoc_module_dir' specified; skipping API doc "
