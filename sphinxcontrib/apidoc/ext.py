@@ -39,6 +39,11 @@ def builder_inited(app):
     if not path.isabs(module_dir):
         module_dir = path.abspath(path.join(app.srcdir, module_dir))
 
+    if not path.exists(module_dir):
+        logger.warning("The path defined in 'apidoc_module_dir' does not "
+                       "exist; skipping API doc generation; %s", module_dir)
+        return
+
     excludes = [path.abspath(path.join(module_dir, exc)) for exc in excludes]
 
     # refactor this module so that we can call 'recurse_tree' like a sane
