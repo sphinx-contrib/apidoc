@@ -37,6 +37,7 @@ documentation's ``conf.py`` file, like so:
     apidoc_module_dir = '../my_code'
     apidoc_output_dir = 'reference'
     apidoc_excluded_paths = ['tests']
+    apidoc_separate_modules = True
 
 Configuration
 -------------
@@ -61,6 +62,12 @@ The *apidoc* extension uses the following configuration values:
    ``apidoc_module_dir``. fnmatch-style wildcarding is supported.
 
    **Optional**, defaults to ``[]``.
+
+``apidoc_separate_modules``
+   Put documentation for each module on its own page. Otherwise there will be
+   one page per (sub)package.
+
+   **Optional**, defaults to ``False``.
 
 Links
 -----

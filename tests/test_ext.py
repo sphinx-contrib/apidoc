@@ -24,6 +24,23 @@ def test_basics(app, status, warning):
     assert not warning.getvalue()
 
 
+@pytest.mark.sphinx('html', testroot='advanced')
+def test_advanced(app, status, warning):
+    logging.setup(app, status, warning)
+    app.builder.build_all()
+    assert (app.outdir / 'api').isdir()
+    assert (app.outdir / 'api' / 'modules.html').exists()
+    for module in [
+            'apidoc_dummy_module.html',
+            'apidoc_dummy_package.apidoc_dummy_submodule_a.html',
+            'apidoc_dummy_package.apidoc_dummy_submodule_b.html'
+    ]:
+        assert (app.outdir / 'api' / module).exists()
+    assert (app.outdir / 'api' / 'apidoc_dummy_package.html').exists()
+    assert not (app.outdir / 'api' / 'conf.html').exists()
+    assert not warning.getvalue()
+
+
 @pytest.mark.sphinx('html', testroot='missing-configuration')
 def test_missing_configuration(app, status, warning):
     logging.setup(app, status, warning)

@@ -29,6 +29,7 @@ def builder_inited(app):
     module_dir = app.config.apidoc_module_dir
     output_dir = path.join(app.srcdir, app.config.apidoc_output_dir)
     excludes = app.config.apidoc_excluded_paths
+    separate_modules = app.config.apidoc_separate_modules
 
     if not module_dir:
         logger.warning("No 'apidoc_module_dir' specified; skipping API doc "
@@ -44,13 +45,21 @@ def builder_inited(app):
                        "exist; skipping API doc generation; %s", module_dir)
         return
 
-    excludes = [path.abspath(path.join(module_dir, exc)) for exc in excludes]
-
     # refactor this module so that we can call 'recurse_tree' like a sane
     # person - at present there is way too much passing around of the
     # 'optparse.Value' instance returned by 'optparse.parse_args'
-    cmd = ['--force', '-o', output_dir, module_dir]
-    if excludes:
-        cmd += excludes
+    def cmd_opts():
+        yield '--force'
 
-    apidoc.main(cmd)
+        if separate_modules:
+            yield '--separate'
+
+        yield '-o'
+        yield output_dir
+
+        yield module_dir
+
+        for exc in excludes:
+            yield path.abspath(path.join(module_dir, exc))
+
+    apidoc.main(list(cmd_opts()))
