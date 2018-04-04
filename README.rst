@@ -11,7 +11,7 @@ Overview
 --------
 
 *sphinx-apidoc* is a tool for automatic generation of Sphinx sources that,
-using the `autodoc <sphinx_autodoc>`_ extension, document a whole package in
+using the `autodoc <sphinx_autodoc>`_ extension, documents a whole package in
 the style of other automatic API documentation tools. *sphinx-apidoc* does not
 actually build documentation - rather it simply generates it. As a result, it
 must be run before *sphinx-build*. This generally results in ``tox.ini`` files
@@ -79,7 +79,10 @@ not necessary with this extension.
 
 There are two implementations of the API documentation feature in *pbr*:
 *autodoc_tree* and *autodoc*. To describe the difference, let's explore how one
-would migrate real-world projects using both features.
+would migrate real-world projects using both features. Your project might use
+one or both: *autodoc_tree* is enabled using the ``autodoc_tree_index_modules``
+setting while *autodoc* is enabled using the ``autodoc_index_modules``
+setting, both found in the ``[pbr]`` section of ``setup.cfg``.
 
 autodoc_tree
 ~~~~~~~~~~~~
@@ -128,36 +131,47 @@ Once migrated, this would look like so:
    ]
    apidoc_output_dir = 'contributor/api'
 
-.. note::
-
-    You could also remove the ``[build_sphinx]`` section from ``setup.cfg`` if
-    you wished to build documentation with ``sphinx-build`` directly instead.
-
 There are a couple of changes here:
 
-- Replace ``autodoc_tree_index_modules`` with ``apidoc_module_dir``
+#. Configure ``apidoc_module_dir`` in ``conf.py``
 
-  ``autodoc_tree_index_modules`` is boolean option indicating whether to enable
-  generation; however, when enabled, docs are always generated for any module
-  in the top level directory (where ``setup.cfg`` is located). By comparison
-  the extension is already enabled by adding it the ``extension`` attribute of
-  ``conf.py``; however, it is necessary to state the directory that you wish to
-  document. As a result, it is necessary to remove
-  ``autodoc_tree_index_modules`` from ``setup.cfg`` and define
-  ``apidoc_module_dir`` in ``conf.py``.
+   With the *autodoc_tree* feature, API documentation is always generated for
+   the directory in which ``setup.cfg`` exists, which is typically the
+   top-level directory. With this extension, you must explicitly state which
+   directory you wish to build documentation for using the
+   ``apidoc_module_dir`` setting. You should configure this to point to your
+   actual package rather than the top level directory as this means you don't
+   need to worry about skipping unrelated files like ``setup.py``.
 
-- Replace ``autodoc_tree_excludes`` with ``apidoc_excluded_paths``
+#. Configure ``apidoc_excluded_paths`` in ``conf.py``
 
-  Like ``apidoc_excluded_paths``, ``autodoc_tree_excludes`` is a list of
-  fnmatch-style paths describing files and directories to exclude relative to
-  the source directory. This means it's a like-for-like replacement so you can
-  simply move the option to ``conf.py``, update the paths (assuming
-  ``apidoc_module_dir`` is configured to anything except ``.``), and rename it.
+   The ``apidoc_excluded_paths`` setting in ``conf.py`` works exactly like the
+   ``[pbr] autodoc_tree_excludes`` setting in ``setup.cfg``; namely, it's a
+   list of fnmatch-style paths describing files and directories to exclude
+   relative to the source directory. This means you can use the values from the
+   ``[pbr] autodoc_tree_excludes`` setting, though you may need to update
+   these if you configured ``apidoc_module_dir`` to point to something other
+   than the top-level directory.
 
-- Replace ``api_doc_dir`` with ``apidoc_output_dir``
+#. Configure ``apidoc_output_dir`` in ``conf.py``
 
-  As above, ``api_doc_dir`` functions exactly as ``apidoc_output_dir`` does.
-  Simply move the option to ``conf.py`` and rename it.
+   The ``apidoc_output_dir`` setting in ``conf.py`` works exactly like the
+   ``[pbr] api_doc_dir`` setting in ``setup.cfg``; namely, it's a path relative
+   to the documentation source directory to which all API documentation should
+   be written. You can just copy the value from the ``[pbr] api_doc_dir``
+   setting.
+
+#. Remove settings from ``setup.cfg``
+
+   Remove the following settings from the ``[pbr]`` section of the
+   ``setup.cfg`` file:
+
+   - ``autodoc_tree_index_modules``
+   - ``autodoc_tree_excludes``
+   - ``api_doc_dir``
+
+   You may also wish to remove the entirety of the ``[build_sphinx]`` section,
+   should you wish to build docs using ``sphinx-build`` instead.
 
 Once done, your output should work exactly as before.
 
@@ -208,28 +222,61 @@ Once migrated, this would look like so:
 Most of the changes necessary are the same as `autodoc_tree`_, with some
 exceptions.
 
-- Replace ``autodoc_index_modules`` with ``apidoc_module_dir``
+#. Configure ``apidoc_module_dir`` in ``conf.py``
 
-  Same as the step required for *autodoc_tree*, but you're removing
-  ``autodoc_index_modules`` instead of ``autodoc_tree_index_modules``.
+   With the *autodoc* feature, API documentation is always generated for
+   the directory in which ``setup.cfg`` exists, which is typically the
+   top-level directory. With this extension, you must explicitly state which
+   directory you wish to build documentation for using the
+   ``apidoc_module_dir`` setting. You should configure this to point to your
+   actual package rather than the top level directory as this means you don't
+   need to worry about skipping unrelated files like ``setup.py``.
 
-- Replace ``autodoc_tree_excludes`` with ``apidoc_excluded_paths``
+#. Configure ``apidoc_excluded_paths`` in ``conf.py``
 
-  ``autodoc_exclude_modules`` differs from ``apidoc_excluded_paths`` and
-  ``autodoc_tree_excludes`` in that it's a list of fnmatch-style **module
-  paths** - not file paths. As a result, you must switch from ``x.y`` format to
-  ``x/y``. These paths should be relative to ``apidoc_module_dir``, not
-  ``setup.cfg`` as before.
+  The  ``apidoc_excluded_paths`` setting in ``conf.py`` differs from the
+  ``[pbr] autodoc_exclude_modules`` setting in ``setup.cfg`` in that the former
+  is a list of fnmatch-style **file paths**, while the latter is a list of
+  fnmatch-style **module paths**. As a result, you can reuse most of the values
+  from the ``[pbr] autodoc_exclude_modules`` setting but you must switch from
+  ``x.y`` format to ``x/y``. You may also need to update these paths if you
+  configured ``apidoc_module_dir`` to point to something other than the
+  top-level directory.
 
-- Replace ``api_doc_dir`` with ``apidoc_output_dir``
+#. Configure ``apidoc_output_dir`` in ``conf.py``
 
-  Same as the step required for *autodoc_tree*.
+   The ``apidoc_output_dir`` setting in ``conf.py`` works exactly like the
+   ``[pbr] api_doc_dir`` setting in ``setup.cfg``; namely, it's a path relative
+   to the documentation source directory to which all API documentation should
+   be written. You can just copy the value from the ``[pbr] api_doc_dir``
+   setting.
 
-- Configure ``apidoc_separate_modules=True``
+#. Configure ``apidoc_separate_modules=True`` in ``conf.py``
 
-  By default, *sphinx-apidoc* generates a document per package while *autodoc*
-  generates a document per (sub)module. By setting this attribute to ``True``,
-  we ensure the latter behavior is used.
+   By default, *sphinx-apidoc* generates a document per package while *autodoc*
+   generates a document per (sub)module. By setting this attribute to ``True``,
+   we ensure the latter behavior is used.
+
+#. Replace references to ``autoindex.rst`` with ``modules.rst``
+
+   The *autodoc* feature generates a list of modules in a file called
+   ``autoindex.rst`` located in the output directory. By comparison,
+   *sphinx-apidoc* and this extension call this file ``modules.rst``. You must
+   update all references to ``autoindex.rst`` with ``modules.rst`` instead.
+
+#. Remove settings from ``setup.cfg``
+
+   Remove the following settings from the ``[pbr]`` section of the
+   ``setup.cfg`` file:
+
+   - ``autodoc_index_modules``
+   - ``autodoc_exclude_modules``
+   - ``api_doc_dir``
+
+   You may also wish to remove the entirety of the ``[build_sphinx]`` section,
+   should you wish to build docs using ``sphinx-build`` instead.
+
+Once done, your output should work exactly as before.
 
 Links
 -----
