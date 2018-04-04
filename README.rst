@@ -262,7 +262,9 @@ exceptions.
    The *autodoc* feature generates a list of modules in a file called
    ``autoindex.rst`` located in the output directory. By comparison,
    *sphinx-apidoc* and this extension call this file ``modules.rst``. You must
-   update all references to ``autoindex.rst`` with ``modules.rst`` instead.
+   update all references to ``autoindex.rst`` with ``modules.rst`` instead. You
+   may also wish to configure the ``depth`` option of any ``toctree``\s that
+   include this document as ``modules.rst`` is nested.
 
 #. Remove settings from ``setup.cfg``
 
@@ -276,7 +278,9 @@ exceptions.
    You may also wish to remove the entirety of the ``[build_sphinx]`` section,
    should you wish to build docs using ``sphinx-build`` instead.
 
-Once done, your output should work exactly as before.
+Once done, your output should look similar to previously. The main change will
+be in the aforementioned ``modules.rst``, which uses a nested layout compared
+to the flat layout of the ``autoindex.rst`` file.
 
 Links
 -----
