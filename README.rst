@@ -72,10 +72,10 @@ The *apidoc* extension uses the following configuration values:
 Migration from pbr
 ------------------
 
-`pbr`_ has historically included a `custom variant <build_sphinx>`_ of the
-``build_sphinx`` distutils command. This provides, among other things, the
-ability to generate API documentation as part of build process. Clearly this is
-not necessary with this extension.
+`pbr`_ has historically included a custom variant of the `build_sphinx`_
+distutils command. This provides, among other things, the ability to generate
+API documentation as part of build process. Clearly this is not necessary with
+this extension.
 
 There are two implementations of the API documentation feature in *pbr*:
 *autodoc_tree* and *autodoc*. To describe the difference, let's explore how one
