@@ -234,14 +234,14 @@ exceptions.
 
 #. Configure ``apidoc_excluded_paths`` in ``conf.py``
 
-  The  ``apidoc_excluded_paths`` setting in ``conf.py`` differs from the
-  ``[pbr] autodoc_exclude_modules`` setting in ``setup.cfg`` in that the former
-  is a list of fnmatch-style **file paths**, while the latter is a list of
-  fnmatch-style **module paths**. As a result, you can reuse most of the values
-  from the ``[pbr] autodoc_exclude_modules`` setting but you must switch from
-  ``x.y`` format to ``x/y``. You may also need to update these paths if you
-  configured ``apidoc_module_dir`` to point to something other than the
-  top-level directory.
+   The  ``apidoc_excluded_paths`` setting in ``conf.py`` differs from the
+   ``[pbr] autodoc_exclude_modules`` setting in ``setup.cfg`` in that the
+   former is a list of fnmatch-style **file paths**, while the latter is a list
+   of fnmatch-style **module paths**. As a result, you can reuse most of the
+   values from the ``[pbr] autodoc_exclude_modules`` setting but you must
+   switch from ``x.y`` format to ``x/y``. You may also need to update these
+   paths if you configured ``apidoc_module_dir`` to point to something other
+   than the top-level directory.
 
 #. Configure ``apidoc_output_dir`` in ``conf.py``
 
