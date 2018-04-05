@@ -14,8 +14,10 @@ from sphinx.util import logging
 
 try:
     from sphinx.ext import apidoc  # Sphinx >= 1.7
+    _ignore_first_arg = False
 except ImportError:
     from sphinx import apidoc  # Sphinx < 1.7
+    _ignore_first_arg = True
 
 if False:
     # For type annotation
@@ -49,6 +51,9 @@ def builder_inited(app):
     # person - at present there is way too much passing around of the
     # 'optparse.Value' instance returned by 'optparse.parse_args'
     def cmd_opts():
+        if _ignore_first_arg:
+            yield 'sphinxcontrib-apidoc'
+
         yield '--force'
 
         if separate_modules:
