@@ -32,6 +32,9 @@ def builder_inited(app):
     output_dir = path.join(app.srcdir, app.config.apidoc_output_dir)
     excludes = app.config.apidoc_excluded_paths
     separate_modules = app.config.apidoc_separate_modules
+    toc_file = app.config.apidoc_toc_file
+    module_first = app.config.apidoc_module_first
+    extra_args = app.config.apidoc_extra_args
 
     if not module_dir:
         logger.warning("No 'apidoc_module_dir' specified; skipping API doc "
@@ -60,8 +63,20 @@ def builder_inited(app):
         if separate_modules:
             yield '--separate'
 
-        yield '-o'
+        if type(toc_file) == str:
+            yield '--tocfile'
+            yield toc_file
+        elif toc_file is False:
+            yield '--no-toc'
+
+        if module_first:
+            yield '--module-first'
+
+        yield '--output-dir'
         yield output_dir
+
+        for arg in extra_args:
+            yield arg
 
         yield module_dir
 

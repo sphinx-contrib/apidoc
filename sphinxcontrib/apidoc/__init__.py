@@ -29,5 +29,8 @@ def setup(app):
     app.add_config_value('apidoc_output_dir', 'api', 'env', [str])
     app.add_config_value('apidoc_excluded_paths', [], 'env', [[str]])
     app.add_config_value('apidoc_separate_modules', False, 'env', [bool])
+    app.add_config_value('apidoc_toc_file', 'modules', 'env', [str, bool])
+    app.add_config_value('apidoc_module_first', False, 'env', [bool])
+    app.add_config_value('apidoc_extra_args', [], 'env', [list])
 
     return {'version': __version__, 'parallel_read_safe': True}
