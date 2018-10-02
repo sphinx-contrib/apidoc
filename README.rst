@@ -69,6 +69,24 @@ The *apidoc* extension uses the following configuration values:
 
    **Optional**, defaults to ``False``.
 
+``apidoc_toc_file``
+   Filename for a table of contents file. Defaults to ``modules``. If set to
+   ``False``, *apidoc* will not create a table of contents file.
+
+   **Optional**, defaults to ``modules``.
+
+``apidoc_module_first``
+   When set to ``True``, put module documentation before submodule
+   documentation.
+
+   **Optional**, defaults to ``False``.
+
+``apidoc_extra_args``
+   Extra arguments which will be passed to ``sphinx-apidoc``. These are placed
+   after flags and before the module name.
+
+   **Optional**, defaults to ``[]``.
+
 Migration from pbr
 ------------------
 
