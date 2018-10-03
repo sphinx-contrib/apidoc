@@ -20,9 +20,8 @@ collect_ignore = ['roots']
 @pytest.fixture(scope='session')
 def sphinx_test_tempdir():
     return path(
-        os.environ.get(
-            'SPHINX_TEST_TEMPDIR',
-            tempfile.mkdtemp(prefix='apidoc-'))).abspath()
+        os.environ.get('SPHINX_TEST_TEMPDIR',
+                       tempfile.mkdtemp(prefix='apidoc-'))).abspath()
 
 
 @pytest.fixture(scope='session')
