@@ -12,7 +12,7 @@ import pbr.version
 
 from sphinxcontrib.apidoc import ext
 
-__version__ = pbr.version.VersionInfo('apidoc').version_string()
+__version__ = pbr.version.VersionInfo('sphinxcontrib-apidoc').version_string()
 
 if False:
     # For type annotation
