@@ -71,6 +71,39 @@ def test_advanced(app, status, warning):
     assert not warning.getvalue()
 
 
+@pytest.mark.sphinx('html', testroot='advanced-negative')
+def test_advanced_negative(app, status, warning):
+    """The "test_advanced" test but with boolean options toggled."""
+    logging.setup(app, status, warning)
+    app.builder.build_all()
+
+    assert (app.srcdir / 'api').isdir()
+    for module in [
+            'apidoc_dummy_module.rst',
+    ]:
+        assert (app.srcdir / 'api' / module).exists()
+    assert (app.srcdir / 'api' / 'apidoc_dummy_package.rst').exists()
+    assert not (app.srcdir / 'api' / 'custom.rst').exists()
+    assert not (app.srcdir / 'api' / 'conf.rst').exists()
+
+    with open(app.srcdir / 'api' / 'apidoc_dummy_package.rst') as fh:
+        package_doc = [x.strip() for x in fh.readlines()]
+
+    # The 'Module contents' header is present if '--module-first' isn't used
+    assert 'Module contents' in package_doc
+
+    assert (app.outdir / 'api').isdir()
+    for module in [
+            'apidoc_dummy_module.html',
+    ]:
+        assert (app.outdir / 'api' / module).exists()
+    assert (app.outdir / 'api' / 'apidoc_dummy_package.html').exists()
+    assert not (app.outdir / 'api' / 'custom.html').exists()
+    assert not (app.outdir / 'api' / 'conf.html').exists()
+
+    assert not warning.getvalue()
+
+
 @pytest.mark.sphinx('html', testroot='missing-configuration')
 def test_missing_configuration(app, status, warning):
     logging.setup(app, status, warning)
