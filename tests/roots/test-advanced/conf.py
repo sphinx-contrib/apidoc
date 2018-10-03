@@ -13,3 +13,4 @@ apidoc_excluded_paths = ['conf.py']
 apidoc_separate_modules = True
 apidoc_toc_file = 'custom'
 apidoc_module_first = True
+apidoc_extra_args = ['--private']
