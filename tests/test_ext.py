@@ -17,10 +17,17 @@ from sphinx.util import logging
 def test_basics(app, status, warning):
     logging.setup(app, status, warning)
     app.builder.build_all()
+
+    assert (app.srcdir / 'api').isdir()
+    assert (app.srcdir / 'api' / 'modules.rst').exists()
+    assert (app.srcdir / 'api' / 'apidoc_dummy_module.rst').exists()
+    assert not (app.srcdir / 'api' / 'conf.rst').exists()
+
     assert (app.outdir / 'api').isdir()
     assert (app.outdir / 'api' / 'modules.html').exists()
     assert (app.outdir / 'api' / 'apidoc_dummy_module.html').exists()
     assert not (app.outdir / 'api' / 'conf.html').exists()
+
     assert not warning.getvalue()
 
 
@@ -28,6 +35,18 @@ def test_basics(app, status, warning):
 def test_advanced(app, status, warning):
     logging.setup(app, status, warning)
     app.builder.build_all()
+
+    assert (app.srcdir / 'api').isdir()
+    assert (app.srcdir / 'api' / 'modules.rst').exists()
+    for module in [
+            'apidoc_dummy_module.rst',
+            'apidoc_dummy_package.apidoc_dummy_submodule_a.rst',
+            'apidoc_dummy_package.apidoc_dummy_submodule_b.rst'
+    ]:
+        assert (app.srcdir / 'api' / module).exists()
+    assert (app.srcdir / 'api' / 'apidoc_dummy_package.rst').exists()
+    assert not (app.srcdir / 'api' / 'conf.rst').exists()
+
     assert (app.outdir / 'api').isdir()
     assert (app.outdir / 'api' / 'modules.html').exists()
     for module in [
@@ -38,6 +57,7 @@ def test_advanced(app, status, warning):
         assert (app.outdir / 'api' / module).exists()
     assert (app.outdir / 'api' / 'apidoc_dummy_package.html').exists()
     assert not (app.outdir / 'api' / 'conf.html').exists()
+
     assert not warning.getvalue()
 
 
