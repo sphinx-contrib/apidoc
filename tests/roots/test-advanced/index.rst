@@ -3,4 +3,4 @@ apidoc
 
 .. toctree::
 
-   api/modules
+   api/custom

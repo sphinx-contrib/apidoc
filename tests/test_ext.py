@@ -10,6 +10,7 @@
 """
 
 import pytest
+import sphinx
 from sphinx.util import logging
 
 
@@ -33,11 +34,14 @@ def test_basics(app, status, warning):
 
 @pytest.mark.sphinx('html', testroot='advanced')
 def test_advanced(app, status, warning):
+    if sphinx.version_info < (1, 8, 0):
+        pytest.xfail('This should fail on older Sphinx versions')
+
     logging.setup(app, status, warning)
     app.builder.build_all()
 
     assert (app.srcdir / 'api').isdir()
-    assert (app.srcdir / 'api' / 'modules.rst').exists()
+    assert (app.srcdir / 'api' / 'custom.rst').exists()
     for module in [
             'apidoc_dummy_module.rst',
             'apidoc_dummy_package.apidoc_dummy_submodule_a.rst',
@@ -47,8 +51,14 @@ def test_advanced(app, status, warning):
     assert (app.srcdir / 'api' / 'apidoc_dummy_package.rst').exists()
     assert not (app.srcdir / 'api' / 'conf.rst').exists()
 
+    with open(app.srcdir / 'api' / 'apidoc_dummy_package.rst') as fh:
+        package_doc = [x.strip() for x in fh.readlines()]
+
+    # The 'Module contents' header isn't present if '--module-first' used
+    assert 'Module contents' not in package_doc
+
     assert (app.outdir / 'api').isdir()
-    assert (app.outdir / 'api' / 'modules.html').exists()
+    assert (app.outdir / 'api' / 'custom.html').exists()
     for module in [
             'apidoc_dummy_module.html',
             'apidoc_dummy_package.apidoc_dummy_submodule_a.html',
