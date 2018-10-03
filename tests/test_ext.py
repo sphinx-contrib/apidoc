@@ -45,7 +45,8 @@ def test_advanced(app, status, warning):
     for module in [
             'apidoc_dummy_module.rst',
             'apidoc_dummy_package.apidoc_dummy_submodule_a.rst',
-            'apidoc_dummy_package.apidoc_dummy_submodule_b.rst'
+            'apidoc_dummy_package.apidoc_dummy_submodule_b.rst',
+            'apidoc_dummy_package._apidoc_private_dummy_submodule.rst',
     ]:
         assert (app.srcdir / 'api' / module).exists()
     assert (app.srcdir / 'api' / 'apidoc_dummy_package.rst').exists()
@@ -62,7 +63,8 @@ def test_advanced(app, status, warning):
     for module in [
             'apidoc_dummy_module.html',
             'apidoc_dummy_package.apidoc_dummy_submodule_a.html',
-            'apidoc_dummy_package.apidoc_dummy_submodule_b.html'
+            'apidoc_dummy_package.apidoc_dummy_submodule_b.html',
+            'apidoc_dummy_package._apidoc_private_dummy_submodule.html',
     ]:
         assert (app.outdir / 'api' / module).exists()
     assert (app.outdir / 'api' / 'apidoc_dummy_package.html').exists()
