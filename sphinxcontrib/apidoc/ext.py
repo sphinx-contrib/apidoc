@@ -10,6 +10,7 @@
 
 from os import path
 
+import sphinx
 from sphinx.util import logging
 
 try:
@@ -35,6 +36,11 @@ def builder_inited(app):
     toc_file = app.config.apidoc_toc_file
     module_first = app.config.apidoc_module_first
     extra_args = app.config.apidoc_extra_args
+
+    if toc_file and sphinx.version_info < (1, 8, 0):
+        logger.warning("'apidoc_toc_file' is only supported by Sphinx "
+                       "1.8+; skipping API doc generation")
+        return
 
     if not module_dir:
         logger.warning("No 'apidoc_module_dir' specified; skipping API doc "
@@ -63,11 +69,11 @@ def builder_inited(app):
         if separate_modules:
             yield '--separate'
 
-        if type(toc_file) == str:
+        if isinstance(toc_file, bool) and toc_file is False:
+            yield '--no-toc'
+        elif toc_file:
             yield '--tocfile'
             yield toc_file
-        elif toc_file is False:
-            yield '--no-toc'
 
         if module_first:
             yield '--module-first'
