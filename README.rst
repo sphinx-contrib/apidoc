@@ -73,7 +73,7 @@ The *apidoc* extension uses the following configuration values:
    Filename for a table of contents file. Defaults to ``modules``. If set to
    ``False``, *apidoc* will not create a table of contents file.
 
-   **Optional**, defaults to ``modules``.
+   **Optional**, defaults to ``None``.
 
 ``apidoc_module_first``
    When set to ``True``, put module documentation before submodule
