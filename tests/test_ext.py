@@ -19,12 +19,12 @@ def test_basics(app, status, warning):
     logging.setup(app, status, warning)
     app.builder.build_all()
 
-    assert (app.srcdir / 'api').isdir()
+    assert (app.srcdir / 'api').is_dir()
     assert (app.srcdir / 'api' / 'modules.rst').exists()
     assert (app.srcdir / 'api' / 'apidoc_dummy_module.rst').exists()
     assert not (app.srcdir / 'api' / 'conf.rst').exists()
 
-    assert (app.outdir / 'api').isdir()
+    assert (app.outdir / 'api').is_dir()
     assert (app.outdir / 'api' / 'modules.html').exists()
     assert (app.outdir / 'api' / 'apidoc_dummy_module.html').exists()
     assert not (app.outdir / 'api' / 'conf.html').exists()
@@ -40,7 +40,7 @@ def test_advanced(app, status, warning):
     logging.setup(app, status, warning)
     app.builder.build_all()
 
-    assert (app.srcdir / 'api').isdir()
+    assert (app.srcdir / 'api').is_dir()
     assert (app.srcdir / 'api' / 'custom.rst').exists()
     for module in [
             'apidoc_dummy_module.rst',
@@ -58,7 +58,7 @@ def test_advanced(app, status, warning):
     # The 'Module contents' header isn't present if '--module-first' used
     assert 'Module contents' not in package_doc
 
-    assert (app.outdir / 'api').isdir()
+    assert (app.outdir / 'api').is_dir()
     assert (app.outdir / 'api' / 'custom.html').exists()
     for module in [
             'apidoc_dummy_module.html',
@@ -79,7 +79,7 @@ def test_advanced_negative(app, status, warning):
     logging.setup(app, status, warning)
     app.builder.build_all()
 
-    assert (app.srcdir / 'api').isdir()
+    assert (app.srcdir / 'api').is_dir()
     for module in [
             'apidoc_dummy_module.rst',
     ]:
@@ -94,7 +94,7 @@ def test_advanced_negative(app, status, warning):
     # The 'Module contents' header is present if '--module-first' isn't used
     assert 'Module contents' in package_doc
 
-    assert (app.outdir / 'api').isdir()
+    assert (app.outdir / 'api').is_dir()
     for module in [
             'apidoc_dummy_module.html',
     ]:
