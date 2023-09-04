@@ -2,8 +2,9 @@
 sphinxcontrib-apidoc
 ====================
 
-.. image:: https://travis-ci.org/sphinx-contrib/apidoc.svg?branch=master
-    :target: https://travis-ci.org/sphinx-contrib/apidoc
+.. image:: https://github.com/sphinx-contrib/apidoc/actions/workflows/ci.yaml/badge.svg
+    :target: https://github.com/sphinx-contrib/apidoc/actions/workflows/ci.yaml
+    :alt: Build Status
 
 A Sphinx extension for running `sphinx-apidoc`_ on each build.
 
