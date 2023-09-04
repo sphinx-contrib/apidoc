@@ -37,6 +37,7 @@ def sphinx_test_tempdir():
 def rootdir():
     if sphinx.version_info >= (7, 2, 0):
         from pathlib import Path
+
         return Path(os.path.dirname(__file__) or '.').resolve() / 'roots'
     else:
         from sphinx.testing.path import path
