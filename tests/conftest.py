@@ -23,17 +23,13 @@ def sphinx_test_tempdir():
         from pathlib import Path
 
         return Path(
-            os.environ.get(
-                'SPHINX_TEST_TEMPDIR', tempfile.mkdtemp(prefix='apidoc-'),
-            )
+            os.environ.get('SPHINX_TEST_TEMPDIR', tempfile.mkdtemp(prefix='apidoc-'))
         ).resolve()
     else:
         from sphinx.testing.path import path
 
         return path(
-            os.environ.get(
-                'SPHINX_TEST_TEMPDIR', tempfile.mkdtemp(prefix='apidoc-'),
-            )
+            os.environ.get('SPHINX_TEST_TEMPDIR', tempfile.mkdtemp(prefix='apidoc-'))
         ).abspath()
 
 

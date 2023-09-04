@@ -15,9 +15,11 @@ from sphinx.util import logging
 
 try:
     from sphinx.ext import apidoc  # Sphinx >= 1.7
+
     _ignore_first_arg = False
 except ImportError:
     from sphinx import apidoc  # Sphinx < 1.7
+
     _ignore_first_arg = True
 
 if False:
@@ -38,13 +40,16 @@ def builder_inited(app):
     extra_args = app.config.apidoc_extra_args
 
     if toc_file and sphinx.version_info < (1, 8, 0):
-        logger.warning("'apidoc_toc_file' is only supported by Sphinx "
-                       "1.8+; skipping API doc generation")
+        logger.warning(
+            "'apidoc_toc_file' is only supported by Sphinx "
+            "1.8+; skipping API doc generation"
+        )
         return
 
     if not module_dir:
-        logger.warning("No 'apidoc_module_dir' specified; skipping API doc "
-                       "generation")
+        logger.warning(
+            "No 'apidoc_module_dir' specified; skipping API doc " "generation"
+        )
         return
 
     # if the path is relative, make it relative to the 'conf.py' directory
@@ -54,7 +59,9 @@ def builder_inited(app):
     if not path.exists(module_dir):
         logger.warning(
             "The path defined in 'apidoc_module_dir' does not "
-            "exist; skipping API doc generation; %s", module_dir)
+            "exist; skipping API doc generation; %s",
+            module_dir,
+        )
         return
 
     # refactor this module so that we can call 'recurse_tree' like a sane
