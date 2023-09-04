@@ -1,2 +1,2 @@
 pbr
-Sphinx>=1.6.0
+Sphinx>=5.0.0
