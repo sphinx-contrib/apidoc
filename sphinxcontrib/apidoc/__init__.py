@@ -4,24 +4,20 @@
 
     A Sphinx extension for running 'sphinx-apidoc' on each build.
 
-    :copyright: Copyright 2018 by Stephen Finucane <stephen@that.guru>
+    :copyright: Copyright 2018-present by Stephen Finucane <stephen@that.guru>
     :license: BSD, see LICENSE for details.
 """
 
 import pbr.version
+from typing import Any, Dict
 
+from sphinx.application import Sphinx
 from sphinxcontrib.apidoc import ext
 
 __version__ = pbr.version.VersionInfo('sphinxcontrib-apidoc').version_string()
 
-if False:
-    # For type annotation
-    from typing import Any, Dict  # noqa
-    from sphinx.application import Sphinx  # noqa
 
-
-def setup(app):
-    # type: (Sphinx) -> Dict[str, Any]
+def setup(app: Sphinx) -> Dict[str, Any]:
     app.setup_extension('sphinx.ext.autodoc')  # We need autodoc to function
 
     app.connect('builder-inited', ext.builder_inited)

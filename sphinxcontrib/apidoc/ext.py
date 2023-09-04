@@ -4,32 +4,20 @@
 
     A Sphinx extension for running 'sphinx-apidoc' on each build.
 
-    :copyright: Copyright 2018 by Stephen Finucane <stephen@that.guru>
+    :copyright: Copyright 2018-present by Stephen Finucane <stephen@that.guru>
     :license: BSD, see LICENSE for details.
 """
 
 from os import path
 
-import sphinx
+from sphinx.application import Sphinx
+from sphinx.ext import apidoc
 from sphinx.util import logging
-
-try:
-    from sphinx.ext import apidoc  # Sphinx >= 1.7
-
-    _ignore_first_arg = False
-except ImportError:
-    from sphinx import apidoc  # Sphinx < 1.7
-
-    _ignore_first_arg = True
-
-if False:
-    # For type annotation
-    from sphinx.application import Sphinx  # noqa
 
 logger = logging.getLogger(__name__)
 
 
-def builder_inited(app):
+def builder_inited(app: Sphinx) -> None:
     # type: (Sphinx) -> None
     module_dir = app.config.apidoc_module_dir
     output_dir = path.join(app.srcdir, app.config.apidoc_output_dir)
@@ -38,13 +26,6 @@ def builder_inited(app):
     toc_file = app.config.apidoc_toc_file
     module_first = app.config.apidoc_module_first
     extra_args = app.config.apidoc_extra_args
-
-    if toc_file and sphinx.version_info < (1, 8, 0):
-        logger.warning(
-            "'apidoc_toc_file' is only supported by Sphinx "
-            "1.8+; skipping API doc generation"
-        )
-        return
 
     if not module_dir:
         logger.warning(
@@ -68,9 +49,6 @@ def builder_inited(app):
     # person - at present there is way too much passing around of the
     # 'optparse.Value' instance returned by 'optparse.parse_args'
     def cmd_opts():
-        if _ignore_first_arg:
-            yield 'sphinxcontrib-apidoc'
-
         yield '--force'
 
         if separate_modules:

@@ -2,7 +2,7 @@
     pytest config for sphinxcontrib/apidoc/tests
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    :copyright: Copyright 2017 by Stephen Finucane <stephen@that.guru>
+    :copyright: Copyright 2018-present by Stephen Finucane <stephen@that.guru>
     :license: BSD, see LICENSE for details.
 """
 

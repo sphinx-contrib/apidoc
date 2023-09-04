@@ -5,7 +5,7 @@
 
     Test the sphinxcontrib.apidoc module.
 
-    :copyright: Copyright 2018 by Stephen Finucane <stephen@that.guru>.
+    :copyright: Copyright 2018-present by Stephen Finucane <stephen@that.guru>
     :license: BSD, see LICENSE for details.
 """
 
