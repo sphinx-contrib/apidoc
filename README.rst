@@ -59,10 +59,10 @@ The *apidoc* extension uses the following configuration values:
    **Optional**, defaults to ``api``.
 
 ``apidoc_template_dir``
-   A directory containing user-defined templates. Template files in this 
-   directory that match the default apidoc templates (``module.rst_t``, 
+   A directory containing user-defined templates. Template files in this
+   directory that match the default apidoc templates (``module.rst_t``,
    ``package.rst_t``, ``toc.rst_t``) will overwrite them. The default templates
-   can be found in ``site-packages/sphinx/templates/apidoc/``. This path is 
+   can be found in ``site-packages/sphinx/templates/apidoc/``. This path is
    relative to the documentation source directory.
 
    **Optional**, defaults to ``templates``.
