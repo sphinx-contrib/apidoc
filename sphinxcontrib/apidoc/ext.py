@@ -20,6 +20,7 @@ logger = logging.getLogger(__name__)
 def builder_inited(app: Sphinx) -> None:
     module_dir = app.config.apidoc_module_dir
     output_dir = path.join(app.srcdir, app.config.apidoc_output_dir)
+    template_dir = path.join(app.srcdir, app.config.apidoc_template_dir)
     excludes = app.config.apidoc_excluded_paths
     separate_modules = app.config.apidoc_separate_modules
     toc_file = app.config.apidoc_toc_file
