@@ -65,7 +65,7 @@ The *apidoc* extension uses the following configuration values:
    can be found in ``site-packages/sphinx/templates/apidoc/``. This path is
    relative to the documentation source directory.
 
-   **Optional**, defaults to ``templates``.
+   **Optional**, defaults to ``'templates'``.
 
 ``apidoc_excluded_paths``
    An optional list of modules to exclude. These should be paths relative to
