@@ -24,7 +24,7 @@ def setup(app: Sphinx) -> Dict[str, Any]:
     app.add_config_value('apidoc_module_dir', None, 'env', [str])
     app.add_config_value('apidoc_output_dir', 'api', 'env', [str])
     app.add_config_value('apidoc_template_dir', 'templates', 'env', [str])
-    app.add_config_value('apidoc_excluded_paths', [], 'env', [[str]])
+    app.add_config_value('apidoc_excluded_paths', [], 'env', list[str])
     app.add_config_value('apidoc_separate_modules', False, 'env', [bool])
     app.add_config_value('apidoc_toc_file', None, 'env', [str, bool])
     app.add_config_value('apidoc_module_first', False, 'env', [bool])
