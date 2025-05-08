@@ -1,9 +1,9 @@
 """
-    pytest config for sphinxcontrib/apidoc/tests
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+pytest config for sphinxcontrib/apidoc/tests
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    :copyright: Copyright 2018-present by Stephen Finucane <stephen@that.guru>
-    :license: BSD, see LICENSE for details.
+:copyright: Copyright 2018-present by Stephen Finucane <stephen@that.guru>
+:license: BSD, see LICENSE for details.
 """
 
 import os

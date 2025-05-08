@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 """
-    test_apidoc
-    ~~~~~~~~~~~
+test_apidoc
+~~~~~~~~~~~
 
-    Test the sphinxcontrib.apidoc module.
+Test the sphinxcontrib.apidoc module.
 
-    :copyright: Copyright 2018-present by Stephen Finucane <stephen@that.guru>
-    :license: BSD, see LICENSE for details.
+:copyright: Copyright 2018-present by Stephen Finucane <stephen@that.guru>
+:license: BSD, see LICENSE for details.
 """
 
 import pytest
