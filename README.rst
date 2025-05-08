@@ -10,10 +10,12 @@ A Sphinx extension for running `sphinx-apidoc`_ on each build.
 
 .. important::
 
-    Sphinx includes a built-in extension adding this functionality, with many
-    of the same options. New users should opt for this extension instead, while
-    existing users should seek to migrate as this project will eventually be
-    retired.
+    Sphinx 8.2.0 introduced a built-in extension adding this functionality,
+    with many of the same options. New users should opt for this extension
+    instead, while existing users should seek to migrate as this project will
+    eventually be retired. For more information, refer to the
+    `sphinx.ext.apidoc`_ documentation. A migration guide is provided `below
+    <migration-to-sphinx.ext.apidoc`.
 
 Overview
 --------
@@ -103,6 +105,46 @@ The *apidoc* extension uses the following configuration values:
    after flags and before the module name.
 
    **Optional**, defaults to ``[]``.
+
+.. _migration-to-sphinx.ext.apidoc:
+
+Migration to ``sphinx.ext.apidoc``
+----------------------------------
+
+Starting in Sphinx 8.2.0, Sphinx includes the `sphinx.ext.apidoc`_ extension,
+which includes most or all of the functionality provided by this extension. It
+should be preferred for both new and existing users. Consider the previous
+``conf.py`` example given above:
+
+.. code-block:: python
+
+    extensions = [
+        'sphinxcontrib.apidoc',
+        # ...
+    ]
+    apidoc_module_dir = '../my_code'
+    apidoc_output_dir = 'reference'
+    apidoc_excluded_paths = ['tests']
+    apidoc_separate_modules = True
+
+This can be rewritten to use the new extension like so:
+
+.. code-block:: python
+
+    extensions = [
+        'sphinx.ext.apidoc',
+        # ...
+    ]
+    apidoc_modules = [
+        {
+            'path': '../my_code',
+            'destination': 'reference',
+            'exclude_patterns': ['**/tests/*'],
+            'separate_modules': True,
+        },
+    ]
+
+For more information, refer to the `sphinx.ext.apidoc`_ documentation.
 
 Migration from pbr
 ------------------
@@ -325,6 +367,7 @@ Links
 
 .. Links
 
+.. _sphinx.ext.apidoc: https://www.sphinx-doc.org/en/master/usage/extensions/apidoc.html
 .. _sphinx-apidoc: http://www.sphinx-doc.org/en/stable/man/sphinx-apidoc.html
 .. _sphinx_autodoc: http://www.sphinx-doc.org/en/stable/ext/autodoc.html
 .. _pbr: https://docs.openstack.org/pbr/
