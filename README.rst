@@ -8,6 +8,13 @@ sphinxcontrib-apidoc
 
 A Sphinx extension for running `sphinx-apidoc`_ on each build.
 
+.. important::
+
+    Sphinx includes a built-in extension adding this functionality, with many
+    of the same options. New users should opt for this extension instead, while
+    existing users should seek to migrate as this project will eventually be
+    retired.
+
 Overview
 --------
 
