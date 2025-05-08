@@ -1,11 +1,11 @@
 """
-    sphinxcontrib.apidoc
-    ~~~~~~~~~~~~~~~~~~~~
+sphinxcontrib.apidoc
+~~~~~~~~~~~~~~~~~~~~
 
-    A Sphinx extension for running 'sphinx-apidoc' on each build.
+A Sphinx extension for running 'sphinx-apidoc' on each build.
 
-    :copyright: Copyright 2018-present by Stephen Finucane <stephen@that.guru>
-    :license: BSD, see LICENSE for details.
+:copyright: Copyright 2018-present by Stephen Finucane <stephen@that.guru>
+:license: BSD, see LICENSE for details.
 """
 
 import pbr.version

@@ -1,11 +1,11 @@
 """
-    sphinxcontrib.apidoc.ext
-    ~~~~~~~~~~~~~~~~~~~~~~~~
+sphinxcontrib.apidoc.ext
+~~~~~~~~~~~~~~~~~~~~~~~~
 
-    A Sphinx extension for running 'sphinx-apidoc' on each build.
+A Sphinx extension for running 'sphinx-apidoc' on each build.
 
-    :copyright: Copyright 2018-present by Stephen Finucane <stephen@that.guru>
-    :license: BSD, see LICENSE for details.
+:copyright: Copyright 2018-present by Stephen Finucane <stephen@that.guru>
+:license: BSD, see LICENSE for details.
 """
 
 from os import path
@@ -28,9 +28,7 @@ def builder_inited(app: Sphinx) -> None:
     extra_args = app.config.apidoc_extra_args
 
     if not module_dir:
-        logger.warning(
-            "No 'apidoc_module_dir' specified; skipping API doc " "generation"
-        )
+        logger.warning("No 'apidoc_module_dir' specified; skipping API doc generation")
         return
 
     # if the path is relative, make it relative to the 'conf.py' directory
