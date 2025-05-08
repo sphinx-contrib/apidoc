@@ -67,8 +67,7 @@ def builder_inited(app: Sphinx) -> None:
         yield '--templatedir'
         yield template_dir
 
-        for arg in extra_args:
-            yield arg
+        yield from extra_args
 
         yield module_dir
 

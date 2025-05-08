@@ -1,3 +1,3 @@
-class Baz(object):
+class Baz:
     def inga(self):
         return 1 + 3

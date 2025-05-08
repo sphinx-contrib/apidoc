@@ -1,6 +1,3 @@
-from __future__ import print_function
-
-
-class Bar(object):
+class Bar:
     def foo(self):
         print('Hello, world')
