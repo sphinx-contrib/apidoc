@@ -139,10 +139,16 @@ This can be rewritten to use the new extension like so:
         {
             'path': '../my_code',
             'destination': 'reference',
-            'exclude_patterns': ['**/tests/*'],
+            'exclude_patterns': ['../my_code/tests'],
             'separate_modules': True,
         },
     ]
+
+You'll note that configuration goes from a single flat set of configuration
+options to a list of per-module configurations. In addition, the
+``exclude_patterns`` patterns are relative to the **configuration directory**
+(where ``conf.py`` lives), not relative to ``path`` like
+``apidoc_excluded_paths``.
 
 For more information, refer to the `sphinx.ext.apidoc`_ documentation.
 
