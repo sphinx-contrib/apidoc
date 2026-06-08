@@ -15,7 +15,7 @@ A Sphinx extension for running `sphinx-apidoc`_ on each build.
     instead, while existing users should seek to migrate as this project will
     eventually be retired. For more information, refer to the
     `sphinx.ext.apidoc`_ documentation. A migration guide is provided `below
-    <migration-to-sphinx.ext.apidoc`.
+    <#migration-to-sphinx-ext-apidoc>`_.
 
 Overview
 --------
